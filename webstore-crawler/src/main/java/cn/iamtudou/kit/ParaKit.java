@@ -4,7 +4,6 @@ import cn.iamtudou.constants.Const;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,6 +12,7 @@ public class ParaKit {
 
     /**
      * 判断是否为资讯类url
+     *
      * @param url url
      * @return
      */
@@ -28,6 +28,7 @@ public class ParaKit {
 
     /**
      * 页面时间转时间戳
+     *
      * @param str
      * @return
      */
@@ -41,10 +42,8 @@ public class ParaKit {
                 gp = matcher.group("group");
         }
 
-        Date date = null;
         try {
-            date = sdf.parse(gp);
-            timestmp = date.getTime();
+            timestmp = sdf.parse(gp).getTime();
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -54,6 +53,7 @@ public class ParaKit {
 
     /**
      * 匹配资讯版块名
+     *
      * @param str
      * @return
      */
