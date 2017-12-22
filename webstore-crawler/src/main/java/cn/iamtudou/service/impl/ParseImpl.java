@@ -9,7 +9,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import javax.print.Doc;
 import java.net.MalformedURLException;
 import java.nio.charset.Charset;
 import java.util.*;
@@ -20,11 +19,8 @@ public class ParseImpl extends Service {
 
     public void parse() {
         String url = "http://www.163.com";
-        Calendar calendar = Calendar.getInstance();
-        String todayFolder = String.format("%s-%s-%s", calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1,
-                calendar.get(Calendar.DAY_OF_MONTH));
-        imgFolder = String.format("%s/%s", prop.getProperty("img.path"), todayFolder);
-        FileKit.folderOp(imgFolder);
+
+        imgFolderCheck();
         taskParse(url);
     }
 
@@ -48,10 +44,21 @@ public class ParseImpl extends Service {
             }
         }
 
-        for (Map.Entry<String, String> entry : urlMap.entrySet())
-            pageParse(entry.getKey());
+        List<NewsRecord> recordList = new ArrayList<>();
+        for (Map.Entry<String, String> entry : urlMap.entrySet()) {
+            NewsRecord record = pageParse(entry.getKey());
+            if (record != null)
+                recordList.add(record);
+        }
+
+        DataKit.submit(recordList);
     }
 
+    /**
+     * 详情页资讯采集
+     * @param url 详情页url
+     * @return
+     */
     private NewsRecord pageParse(String url) {
         String html = null;
         try {
@@ -71,13 +78,13 @@ public class ParseImpl extends Service {
             for (Element ele : imgElms)
                 imgs.add(ele.attr("src"));
 
+            //将网页中的img标签替换为{imgTag}标识，读取记录时，关联{imgTag}锚点与图片路径
             for (int i = 0; i < imgElms.size(); i++)
                 elms.select("img").get(0).replaceWith(new Element("imgTag"));
         }
         String ehtml = elms.html();
         ehtml = ehtml.replace("<imgTag>", "{imgTag}").replace("</imgTag>", "");
         Document textDoc = Jsoup.parse(ehtml);
-        String text = textDoc.text();
 
         String[] imgUrlArr = imgs.toArray(new String[imgs.size()]);
         String[] imgPathArr = new String[imgUrlArr.length];
@@ -91,7 +98,7 @@ public class ParseImpl extends Service {
                 e.printStackTrace();
             }
             //图片处理
-            imgPathArr[i] = ImageKit.imgOperate(ifn);
+            imgPathArr[i] = ImageKit.imgOp(ifn);
         }
 
         NewsRecord nr = new NewsRecord();
@@ -106,5 +113,16 @@ public class ParseImpl extends Service {
         nr.setSite("网易");
         nr.setPlate(ParaKit.getPlate(doc.select(".post_crumb").text()));
         return nr;
+    }
+
+    /**
+     * 图片文件夹操作
+     */
+    private void imgFolderCheck() {
+        Calendar calendar = Calendar.getInstance();
+        String todayFolder = String.format("%s-%s-%s", calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1,
+                calendar.get(Calendar.DAY_OF_MONTH));
+        imgFolder = String.format("%s/%s", prop.getProperty("img.path"), todayFolder);
+        FileKit.folderOp(imgFolder);
     }
 }

@@ -1,5 +1,8 @@
 package cn.iamtudou.kit;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,6 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class DownloadKit {
+    private static Logger log = LoggerFactory.getLogger(DownloadKit.class);
 
     /**
      * 从网络下载文件
@@ -29,10 +33,10 @@ public class DownloadKit {
                 fs.write(buffer, 0, byteread);
             }
             return true;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException ffe) {
+            log.error("download file error, msg:{}", ffe.toString());
+        } catch (IOException ioe) {
+            log.error("download file error, msg:{}", ioe.toString());
         }
 
         return false;

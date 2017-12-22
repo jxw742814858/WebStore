@@ -1,5 +1,8 @@
 package cn.iamtudou.kit;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -13,6 +16,7 @@ import java.util.Properties;
  * 图片工具
  */
 public class ImageKit {
+    private static Logger log = LoggerFactory.getLogger(ImageKit.class);
     private static Properties prop = PropKit.getProp("config.properties");
 
     /**
@@ -29,7 +33,7 @@ public class ImageKit {
         try {
             bi = ImageIO.read(file);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("read image file error, msg:{}", e.toString());
         }
         double s_width = bi.getWidth(); //原图片宽度
         double s_height = bi.getHeight(); //原图片高度
@@ -42,7 +46,7 @@ public class ImageKit {
                 thumbnail_w_h(file, width, new Double(width / rate).intValue(), new FileOutputStream(f_file));
                 file.delete();
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error("thumbnail image error, msg:{}", e.toString());
             }
         } else
             file.renameTo(f_file);
