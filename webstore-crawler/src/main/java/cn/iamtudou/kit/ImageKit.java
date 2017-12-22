@@ -21,7 +21,7 @@ public class ImageKit {
      * @param filePath 原图片地址
      * @return 最终图片地址
      */
-    public static String imgOperate(String filePath) {
+    public static String imgOp(String filePath) {
         File file = new File(filePath);
         String f_filePath = filePath.replace("_tmp", "");
         File f_file = new File(f_filePath);

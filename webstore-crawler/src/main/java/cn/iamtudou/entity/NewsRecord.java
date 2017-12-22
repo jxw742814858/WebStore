@@ -2,6 +2,9 @@ package cn.iamtudou.entity;
 
 import java.io.Serializable;
 
+/**
+ * 资讯实体
+ */
 public class NewsRecord implements Serializable {
 
     private String id;
