@@ -1,8 +1,12 @@
 package cn.iamtudou.kit;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.security.MessageDigest;
 
 public class DigestKit {
+    private static Logger log = LoggerFactory.getLogger(DigestKit.class);
 
     public static String encodeMD5(String s) {
         char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
@@ -21,7 +25,7 @@ public class DigestKit {
             }
             return new String(str);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.toString());
             return null;
         }
     }

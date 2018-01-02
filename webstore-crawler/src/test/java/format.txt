@@ -1,1 +1,40 @@
-网易首页 > 军事 > 正文
+数据种类
+1.资讯类（国内新闻、地方新闻、科技新闻）
+2.影视网站（6vhao、80s、mimiyy）
+3.磁力站热搜关键词
+4.热搜话题
+5.内涵段子
+
+ps: 1.不采集资讯图片，展示时根据url使用内置浏览器展示，可查看原页面(境外数据因代理问题无法通过浏览器展示)
+
+准备：
+1.国内新闻来源：
+    1）凤凰网资讯
+    2）新华网
+    3）人民网
+{
+http://news.ifeng.com/
+http://www.xinhuanet.com/
+http://www.people.com.cn/
+}
+
+2.地方新闻来源：
+    1）合肥论坛
+{
+http://bbs.hefei.cc/
+}
+
+3.磁力站：（后期做磁力搜索）
+
+4.热搜话题：
+    1）百度热搜
+    2）搜狗热搜
+    3）微博热搜
+
+{
+http://top.baidu.com/
+http://top.sogou.com/
+http://s.weibo.com/top/summary?cate=homepage
+}
+
+5.内涵段子（暂未发现可在独立页面打开的数据）

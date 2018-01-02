@@ -34,6 +34,7 @@ public class ImageKit {
             bi = ImageIO.read(file);
         } catch (IOException e) {
             log.error("read image file error, msg:{}", e.toString());
+            return null;
         }
         double s_width = bi.getWidth(); //原图片宽度
         double s_height = bi.getHeight(); //原图片高度
@@ -41,7 +42,7 @@ public class ImageKit {
         int width = Integer.valueOf(prop.getProperty("img.width"));
 
         /*当下载的图片尺寸大于设定的最大尺寸时，压缩生成新图片后删除原图片*/
-        if (s_width > width) {
+        /*if (s_width > width) {
             try {
                 thumbnail_w_h(file, width, new Double(width / rate).intValue(), new FileOutputStream(f_file));
                 file.delete();
@@ -49,7 +50,7 @@ public class ImageKit {
                 log.error("thumbnail image error, msg:{}", e.toString());
             }
         } else
-            file.renameTo(f_file);
+            file.renameTo(f_file);*/
 
         return f_filePath;
     }

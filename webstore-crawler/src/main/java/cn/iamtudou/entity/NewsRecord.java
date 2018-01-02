@@ -11,11 +11,11 @@ public class NewsRecord implements Serializable {
     private String url;
     private String title;
     private String cotent;
-    private String[] img_url;
+    private String[] img_url; //页面图片链接
     private long timestamp;
-    private String site;
-    private String plate;
-    private String[] img_path;
+    private String site; //来源网站
+    private String type; //所属分类
+    private String[] img_path; //图片保存地址
     private long createtime;
 
     public String getId() {
@@ -74,12 +74,12 @@ public class NewsRecord implements Serializable {
         this.site = site;
     }
 
-    public String getPlate() {
-        return plate;
+    public String getType() {
+        return type;
     }
 
-    public void setPlate(String plate) {
-        this.plate = plate;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String[] getImg_path() {
