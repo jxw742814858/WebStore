@@ -30,6 +30,7 @@ public class SougouhotParse extends Service {
         List<NewsRecord> newsList = pageParse(url, siteName);
         if (CollectionUtils.isNotEmpty(newsList))
             DataKit.submit(newsList);
+        log.debug("{}'s data parse complete! size:{}", siteName, newsList.size());
     }
 
     private List<NewsRecord> pageParse(String url, String siteName) {
@@ -58,7 +59,7 @@ public class SougouhotParse extends Service {
             if (existsId(record.getId()))
                 continue;
             record.setTitle(entry.getValue());
-            record.setTimestamp(System.currentTimeMillis());
+            record.setCreatetime(System.currentTimeMillis());
             record.setSite(siteName);
 
             dataList.add(record);

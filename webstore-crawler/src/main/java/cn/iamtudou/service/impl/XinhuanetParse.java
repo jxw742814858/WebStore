@@ -27,6 +27,7 @@ public class XinhuanetParse extends Service {
         List<NewsRecord> newsList = pageParse(url, siteName);
         if (CollectionUtils.isNotEmpty(newsList))
             DataKit.submit(newsList);
+        log.debug("{}'s data parse complete! size:{}", siteName, newsList.size());
     }
 
     public List<NewsRecord> pageParse(String url, String siteName) {
@@ -57,7 +58,7 @@ public class XinhuanetParse extends Service {
                 continue;
             record.setTitle(entry.getValue());
             record.setSite(siteName);
-            record.setTimestamp(System.currentTimeMillis());
+            record.setCreatetime(System.currentTimeMillis());
 
             dataList.add(record);
         }

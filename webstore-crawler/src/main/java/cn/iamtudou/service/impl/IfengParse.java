@@ -3,6 +3,7 @@ package cn.iamtudou.service.impl;
 import cn.iamtudou.entity.NewsRecord;
 import cn.iamtudou.kit.DataKit;
 import cn.iamtudou.kit.DigestKit;
+import cn.iamtudou.kit.PropKit;
 import cn.iamtudou.kit.ReqKit;
 import cn.iamtudou.service.Service;
 import org.apache.commons.collections.CollectionUtils;
@@ -20,13 +21,16 @@ import java.util.*;
  */
 public class IfengParse extends Service {
     private Logger log = LoggerFactory.getLogger(IfengParse.class);
+    private Properties prop = PropKit.getProp("config.properties");
 
     public void parse() {
+        System.out.println(prop.getProperty("proxy.host"));
         String siteName = "凤凰网";
         String url = "http://news.ifeng.com/";
         List<NewsRecord> newsList = pageParse(url, siteName);
         if (CollectionUtils.isNotEmpty(newsList))
             DataKit.submit(newsList);
+        log.debug("{}'s data parse complete! size:{}", siteName, newsList.size());
     }
 
     private List<NewsRecord> pageParse(String url, String siteName) {
@@ -56,7 +60,7 @@ public class IfengParse extends Service {
             if (existsId(record.getId()))
                 continue;
             record.setTitle(entry.getValue());
-            record.setTimestamp(System.currentTimeMillis());
+            record.setCreatetime(System.currentTimeMillis());
             record.setSite(siteName);
 
             dataList.add(record);

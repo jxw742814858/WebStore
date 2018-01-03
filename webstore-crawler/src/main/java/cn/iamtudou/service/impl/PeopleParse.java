@@ -27,6 +27,7 @@ public class PeopleParse extends Service {
         List<NewsRecord> newsList = pageParse(url, siteName);
         if (CollectionUtils.isNotEmpty(newsList))
             DataKit.submit(newsList);
+        log.debug("{}'s data parse complete! size:{}", siteName, newsList.size());
     }
 
     private List<NewsRecord> pageParse(String url, String siteName) {
@@ -56,7 +57,7 @@ public class PeopleParse extends Service {
             record.setId(DigestKit.encodeMD5(record.getUrl()));
             if (existsId(record.getId()))
                 continue;
-            record.setTimestamp(System.currentTimeMillis());
+            record.setCreatetime(System.currentTimeMillis());
             record.setSite(siteName);
 
             dataList.add(record);
