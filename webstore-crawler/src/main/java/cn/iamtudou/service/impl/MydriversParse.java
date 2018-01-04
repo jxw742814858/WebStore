@@ -13,28 +13,21 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
-/**
- * 合肥论坛资讯解析
- */
-public class HefeinewsParse extends Service {
-    private Logger log = LoggerFactory.getLogger(HefeinewsParse.class);
+public class MydriversParse extends Service {
+    private Logger log = LoggerFactory.getLogger(MydriversParse.class);
     private DataKit dataKit = new DataKit();
 
     public void parse() {
-        String siteName = "合肥论坛";
-        String[] urls = {
-                "http://news.hefei.cc/L/12020100.shtml",
-                "http://news.hefei.cc/L/12020100_2.shtml"
-        };
-
-        for (String url : urls) {
-            List<NewsRecord> newsList = pageParse(url, siteName);
-            if (CollectionUtils.isNotEmpty(newsList))
-                dataKit.save(newsList, siteName);
-        }
-
+        String siteName = "驱动之家";
+        String url = "http://www.mydrivers.com/";
+        List<NewsRecord> newsList = pageParse(url, siteName);
+        if (CollectionUtils.isNotEmpty(newsList))
+            dataKit.save(newsList, siteName);
     }
 
     private List<NewsRecord> pageParse(String url, String siteName) {
@@ -48,7 +41,7 @@ public class HefeinewsParse extends Service {
         }
 
         Document doc = Jsoup.parse(html);
-        Elements elms = doc.select("#list_box1 ul li a");
+        Elements elms = doc.select(".newslist a");
         Map<String, String> urls = new LinkedHashMap<>();
         for (Element et : elms) {
             try {
@@ -59,13 +52,13 @@ public class HefeinewsParse extends Service {
 
         for (Map.Entry<String, String> entry : urls.entrySet()) {
             NewsRecord record = new NewsRecord();
-            record.setSite(siteName);
             record.setUrl(entry.getKey());
             record.setId(DigestKit.encodeMD5(record.getUrl()));
             if (existsId(record.getId()))
                 continue;
             record.setTitle(entry.getValue());
             record.setCreatetime(System.currentTimeMillis());
+            record.setSite(siteName);
 
             dataList.add(record);
         }

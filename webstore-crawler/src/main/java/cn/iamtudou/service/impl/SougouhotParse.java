@@ -23,14 +23,14 @@ import java.util.Map;
  */
 public class SougouhotParse extends Service {
     private Logger log = LoggerFactory.getLogger(SougouhotParse.class);
+    private DataKit dataKit = new DataKit();
 
     public void parse() {
         String siteName = "搜狗热搜";
         String url = "http://top.sogou.com/";
         List<NewsRecord> newsList = pageParse(url, siteName);
         if (CollectionUtils.isNotEmpty(newsList))
-            DataKit.submit(newsList);
-        log.debug("{}'s data parse complete! size:{}", siteName, newsList.size());
+            dataKit.save(newsList, siteName);
     }
 
     private List<NewsRecord> pageParse(String url, String siteName) {

@@ -20,14 +20,14 @@ import java.util.*;
  */
 public class BaiduhotParse extends Service {
     private Logger log = LoggerFactory.getLogger(BaiduhotParse.class);
+    private DataKit dataKit = new DataKit();
 
     public void parse() {
         String siteName = "百度热搜";
         String url = "http://top.baidu.com/";
         List<NewsRecord> newsList = pageParse(url, siteName);
         if (CollectionUtils.isNotEmpty(newsList))
-            DataKit.submit(newsList);
-        log.debug("{}'s data parse complete! size:{}", siteName, newsList.size());
+            dataKit.save(newsList, siteName);
     }
 
     private List<NewsRecord> pageParse(String url, String siteName) {

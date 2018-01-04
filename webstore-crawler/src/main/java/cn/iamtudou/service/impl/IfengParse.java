@@ -3,7 +3,6 @@ package cn.iamtudou.service.impl;
 import cn.iamtudou.entity.NewsRecord;
 import cn.iamtudou.kit.DataKit;
 import cn.iamtudou.kit.DigestKit;
-import cn.iamtudou.kit.PropKit;
 import cn.iamtudou.kit.ReqKit;
 import cn.iamtudou.service.Service;
 import org.apache.commons.collections.CollectionUtils;
@@ -14,23 +13,24 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 凤凰网资讯解析
  */
 public class IfengParse extends Service {
     private Logger log = LoggerFactory.getLogger(IfengParse.class);
-    private Properties prop = PropKit.getProp("config.properties");
+    private DataKit dataKit = new DataKit();
 
     public void parse() {
-        System.out.println(prop.getProperty("proxy.host"));
         String siteName = "凤凰网";
         String url = "http://news.ifeng.com/";
         List<NewsRecord> newsList = pageParse(url, siteName);
         if (CollectionUtils.isNotEmpty(newsList))
-            DataKit.submit(newsList);
-        log.debug("{}'s data parse complete! size:{}", siteName, newsList.size());
+            dataKit.save(newsList, siteName);
     }
 
     private List<NewsRecord> pageParse(String url, String siteName) {

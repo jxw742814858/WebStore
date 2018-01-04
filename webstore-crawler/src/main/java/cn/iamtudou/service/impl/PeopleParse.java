@@ -20,14 +20,14 @@ import java.util.*;
  */
 public class PeopleParse extends Service {
     private Logger log = LoggerFactory.getLogger(PeopleParse.class);
+    private DataKit dataKit = new DataKit();
 
     public void parse() {
         String siteName = "人民网";
         String url = "http://www.people.com.cn/";
         List<NewsRecord> newsList = pageParse(url, siteName);
         if (CollectionUtils.isNotEmpty(newsList))
-            DataKit.submit(newsList);
-        log.debug("{}'s data parse complete! size:{}", siteName, newsList.size());
+            dataKit.save(newsList, siteName);
     }
 
     private List<NewsRecord> pageParse(String url, String siteName) {

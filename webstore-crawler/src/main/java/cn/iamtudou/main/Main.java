@@ -14,17 +14,22 @@ public class Main {
 
     public static void main(String[] args) {
         ScheduledExecutorService scheduled = new ScheduledThreadPoolExecutor(10);
+
+        Service.loadData();
         String[] sites = {
                 "凤凰网",
                 "新华网",
                 "人民网",
                 "合肥论坛",
                 "百度热搜",
-                "搜狗热搜"
+                "搜狗热搜",
+                "驱动之家",
+                "Hao6v电影网"
         };
-        for (String site : sites) {
-            scheduled.scheduleWithFixedDelay(() -> {
-                Service service = null;
+
+        scheduled.scheduleWithFixedDelay(() -> {
+            Service service = null;
+            for (String site : sites) {
                 switch (site) {
                     case "凤凰网":
                         service = new IfengParse();
@@ -44,6 +49,12 @@ public class Main {
                     case "搜狗热搜":
                         service = new SougouhotParse();
                         break;
+                    case "驱动之家":
+                        service = new MydriversParse();
+                        break;
+                    case "Hao6v电影网":
+                        service = new Hao6vParse();
+                        break;
 
                     default:
                         break;
@@ -54,7 +65,7 @@ public class Main {
                 } catch (Exception e) {
                     log.error("任务解析失败, msg: ", e);
                 }
-            }, 0, 1, TimeUnit.HOURS);
-        }
+            }
+        }, 0, 1, TimeUnit.HOURS);
     }
 }
