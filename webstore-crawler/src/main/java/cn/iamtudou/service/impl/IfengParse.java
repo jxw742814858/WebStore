@@ -37,7 +37,7 @@ public class IfengParse extends Service {
         List<NewsRecord> dataList = new ArrayList<>();
         String html = null;
         try {
-            html = ReqKit.reqRetry(url, false, "DEF", "HTML");
+            html = ReqKit.reqRetry(url, false, "UTF-8", "HTML");
         } catch (Exception e) {
             log.error("", e);
             return null;
