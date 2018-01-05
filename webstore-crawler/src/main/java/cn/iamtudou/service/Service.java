@@ -23,6 +23,10 @@ public abstract class Service {
         }
     }
 
+    public static void delUniqueUrl() {
+        UNIQUE_URL.clear();
+    }
+
     /**
      * 加载数据库中已有数据，不抓取重复数据
      */

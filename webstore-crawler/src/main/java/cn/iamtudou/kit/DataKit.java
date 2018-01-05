@@ -12,6 +12,7 @@ import redis.clients.jedis.Jedis;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 public class DataKit {
     private Logger log = LoggerFactory.getLogger(DataKit.class);
@@ -47,8 +48,15 @@ public class DataKit {
         try (Jedis jedis = getJedis()) {
             if (jedis.exists(keyName))
                 jedis.append(keyName, "," + stringSub(JSON.toJSONString(dataList)));
-            else
+            else { //在存入新一天的数据时，先删除两天之前的数据
+                Set<String> keys = jedis.keys("*");
+                Set<String> days = ParaKit.getLastDays();
+                for (String k : keys) {
+                    if (!days.contains(k))
+                        jedis.del(k);
+                }
                 jedis.set(keyName, stringSub(JSON.toJSONString(dataList)));
+            }
             log.info("{}'s data save redis success. size: {}", siteName, dataList.size());
         } catch (Exception e) {
             log.error("", e);

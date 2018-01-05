@@ -27,6 +27,11 @@ public class Main {
                 "Hao6v电影网"
         };
 
+        // 每三天清空一次去重集合
+        scheduled.scheduleWithFixedDelay(()-> {
+            Service.delUniqueUrl();
+        }, 0, 3, TimeUnit.DAYS);
+
         scheduled.scheduleWithFixedDelay(() -> {
             Service service = null;
             for (String site : sites) {

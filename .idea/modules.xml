@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/WebStore.iml" filepath="$PROJECT_DIR$/WebStore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/webstore-api/webstore-api.iml" filepath="$PROJECT_DIR$/webstore-api/webstore-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/webstore-crawler/webstore-crawler.iml" filepath="$PROJECT_DIR$/webstore-crawler/webstore-crawler.iml" />
     </modules>
   </component>
