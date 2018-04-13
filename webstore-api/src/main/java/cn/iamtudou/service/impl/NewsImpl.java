@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @org.springframework.stereotype.Service("newsImpl")
-public class NewsImpl implements Service {
+public class NewsImpl extends Service {
     private Logger log = LoggerFactory.getLogger(NewsImpl.class);
 
     @Autowired
