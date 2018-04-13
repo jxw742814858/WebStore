@@ -5,9 +5,6 @@ import cn.iamtudou.service.impl.NewsImpl;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
-
-import javax.annotation.Resource;
 
 @org.springframework.stereotype.Service("service")
 public abstract class Service {
@@ -17,7 +14,7 @@ public abstract class Service {
     @Autowired
     MagnetImpl magnetImpl;
 
-    public JSONObject queryNews(String date){
+    public JSONObject queryNews(String date) {
         return newsImpl.queryNews(date);
     }
 
