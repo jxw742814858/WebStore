@@ -1,0 +1,18 @@
+# 员工信息表
+|
+CREATE TABLE `user_staff` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `real_name` varchar(64) DEFAULT NULL COMMENT '真实姓名',
+  `born_date` date DEFAULT NULL COMMENT '出生日期',
+  `gender` bit(1) DEFAULT b'1' COMMENT '性别，1.男 2.女',
+  `telephone` varchar(11) NOT NULL COMMENT '手机号，同时为登陆账号',
+  `pass_word` varchar(32) NOT NULL COMMENT '登陆密码',
+  `qq_number` varchar(20) DEFAULT NULL COMMENT 'QQ号',
+  `wechat_number` varchar(20) DEFAULT NULL COMMENT '微信号',
+  `img_path` varchar(256) DEFAULT NULL COMMENT '头像地址',
+  `posts` varchar(128) DEFAULT NULL COMMENT '职位描述',
+  `describe_info` text COMMENT '说明信息',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='员工信息存储'

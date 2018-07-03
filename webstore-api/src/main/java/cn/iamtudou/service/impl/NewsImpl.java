@@ -1,6 +1,6 @@
 package cn.iamtudou.service.impl;
 
-import cn.iamtudou.dao.NewsDao;
+import cn.iamtudou.mapper.NewsDao;
 import cn.iamtudou.kit.ParaKit;
 import cn.iamtudou.service.Service;
 import com.alibaba.fastjson.JSON;

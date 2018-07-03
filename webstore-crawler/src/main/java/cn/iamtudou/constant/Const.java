@@ -1,4 +1,4 @@
-package cn.iamtudou.constants;
+package cn.iamtudou.constant;
 
 public class Const {
 

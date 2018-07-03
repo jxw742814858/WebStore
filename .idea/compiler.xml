@@ -6,14 +6,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="man-management" />
         <module name="webstore-api" />
         <module name="webstore-crawler" />
+        <module name="webstore-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="man-management" target="1.8" />
       <module name="WebStore" target="1.8" />
       <module name="webstore-api" target="1.8" />
       <module name="webstore-crawler" target="1.8" />
+      <module name="webstore-web" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

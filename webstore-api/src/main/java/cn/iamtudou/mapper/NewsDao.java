@@ -1,4 +1,4 @@
-package cn.iamtudou.dao;
+package cn.iamtudou.mapper;
 
 import cn.iamtudou.kit.PropKit;
 import org.slf4j.Logger;
