@@ -2,7 +2,10 @@ package cn.iamtudou.entity;
 
 import java.io.Serializable;
 
-public class LoginEntity implements Serializable {
+/**
+ * 登陆简单信息实体
+ */
+public class SimpleEntity implements Serializable {
 
     private String id;
     private String password;
