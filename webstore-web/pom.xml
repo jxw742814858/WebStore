@@ -91,7 +91,7 @@
                     <artifactId>spring-boot-maven-plugin</artifactId>
                     <version>1.5.3.RELEASE</version>
                     <configuration>
-                        <mainClass>cn.iamtudou.application</mainClass>
+                        <mainClass>cn.iamtudou.Application</mainClass>
                     </configuration>
                     <executions>
                         <execution>

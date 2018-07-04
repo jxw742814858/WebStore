@@ -3,13 +3,13 @@ package cn.iamtudou.entity;
 import java.io.Serializable;
 
 /**
- * 登陆简单信息实体
+ * 登陆/注册 简单信息实体
  */
 public class SimpleEntity implements Serializable {
 
     private String id;
     private String password;
-    private Integer account_type; // 1.stu 2.teac 3.staff
+    private Integer accountType; // 1.stu 2.teac 3.staff
 
     public String getId() {
         return id;
@@ -27,11 +27,11 @@ public class SimpleEntity implements Serializable {
         this.password = password;
     }
 
-    public Integer getAccount_type() {
-        return account_type;
+    public Integer getAccountType() {
+        return accountType;
     }
 
-    public void setAccount_type(Integer account_type) {
-        this.account_type = account_type;
+    public void setAccountType(Integer accountType) {
+        this.accountType = accountType;
     }
 }
