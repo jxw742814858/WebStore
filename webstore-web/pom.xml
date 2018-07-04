@@ -54,6 +54,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
+            <scope>true</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
         <dependency>
@@ -92,6 +98,7 @@
                     <version>1.5.3.RELEASE</version>
                     <configuration>
                         <mainClass>cn.iamtudou.Application</mainClass>
+                        <fork>true</fork>
                     </configuration>
                     <executions>
                         <execution>

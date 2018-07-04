@@ -3,18 +3,20 @@ package cn.iamtudou.controller;
 import cn.iamtudou.entity.ResponseEntity;
 import cn.iamtudou.entity.SimpleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class Page {
 
     @Autowired
     StaffController staffController;
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @GetMapping(value = "/index")
     public String getIndex() {
         return "index";
     }

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"><!-- 1 -->
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Access-Control-Allow-Origin" content="*">
-    <meta charset="UTF-8">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+    <meta charset="UTF-8" />
     <title>Title</title>
 
     <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
@@ -37,9 +37,8 @@
 <script>
     $('#sub').click(function () {
         var keyword = $('#kwInp').val();
-        // var reqUrl = 'http://s.weibo.com/weibo/' + encodeURIComponent(keyword) + '?topnav=1&wvr=6&topsug=1';
         var reqUrl = 'https://www.baidu.com';
-        $.get(reqUrl,function(data){
+        $.get(reqUrl, function (data) {
             $('#contentBox').html(data)//把data输出
         });
     });
