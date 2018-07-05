@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class Page {
@@ -16,9 +17,19 @@ public class Page {
     @Autowired
     StaffController staffController;
 
-    @GetMapping(value = "/index")
-    public String getIndex() {
+    @RequestMapping (value = "/index")
+    public String index() {
         return "index";
+    }
+
+    @GetMapping(value = "/register")
+    public String register() {
+        return "register";
+    }
+
+    @GetMapping(value = "/login")
+    public String login() {
+        return "login";
     }
 
     @RequestMapping(value = "/registerJudge", method = RequestMethod.POST)
