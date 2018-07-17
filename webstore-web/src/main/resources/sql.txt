@@ -1,18 +1,98 @@
-# 员工信息表
-|
 CREATE TABLE `user_staff` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `real_name` varchar(64) DEFAULT NULL COMMENT '真实姓名',
   `born_date` date DEFAULT NULL COMMENT '出生日期',
-  `gender` bit(1) DEFAULT b'1' COMMENT '性别，1.男 2.女',
+  `gender` bit(1) DEFAULT 0 COMMENT '性别，0.男 1.女',
   `telephone` varchar(11) NOT NULL COMMENT '手机号，同时为登陆账号',
   `pass_word` varchar(32) NOT NULL COMMENT '登陆密码',
+  `education` varchar(16) DEFAULT NULL COMMENT '学历',
+  `school` varchar(64) DEFAULT NULL COMMENT '毕业院校',
+  `subject` varchar(64) DEFAULT NULL COMMENT '所学专业',
   `qq_number` varchar(20) DEFAULT NULL COMMENT 'QQ号',
   `wechat_number` varchar(20) DEFAULT NULL COMMENT '微信号',
+  `born_address` varchar(64) DEFAULT NULL COMMENT '籍贯',
+  `living_address` varchar(128) DEFAULT NULL COMMENT '现居住地址',
   `img_path` varchar(256) DEFAULT NULL COMMENT '头像地址',
   `posts` varchar(128) DEFAULT NULL COMMENT '职位描述',
-  `describe_info` text COMMENT '说明信息',
+  `describe_info` text DEFAULT NULL COMMENT '说明信息',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY (`telephone`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='员工信息存储';
+
+CREATE TABLE `user_teacher` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `real_name` varchar(64) DEFAULT NULL COMMENT '真实姓名',
+  `born_date` date DEFAULT NULL COMMENT '出生日期',
+  `gender` bit(1) DEFAULT 0 COMMENT '性别，0.男 1.女',
+  `telephone` varchar(11) NOT NULL COMMENT '手机号，同时为登陆账号',
+  `pass_word` varchar(32) NOT NULL COMMENT '登陆密码',
+  `education` varchar(16) DEFAULT NULL COMMENT '学历',
+  `school` varchar(64) DEFAULT NULL COMMENT '毕业院校',
+  `subject` varchar(64) DEFAULT NULL COMMENT '所学专业',
+  `auth_status` bit DEFAULT 0 COMMENT '认证状态',
+  `qq_number` varchar(20) DEFAULT NULL COMMENT 'QQ号',
+  `wechat_number` varchar(20) DEFAULT NULL COMMENT '微信号',
+  `born_address` varchar(64) DEFAULT NULL COMMENT '籍贯',
+  `living_address` varchar(128) DEFAULT NULL COMMENT '现居住地址',
+  `img_path` varchar(256) DEFAULT NULL COMMENT '头像地址',
+  `describe_info` text DEFAULT NULL COMMENT '说明信息',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY (`telephone`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='教师信息存储';
+
+CREATE TABLE `user_student` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `real_name` varchar(64) DEFAULT NULL COMMENT '真实姓名',
+  `born_date` date DEFAULT NULL COMMENT '出生日期',
+  `gender` bit(1) DEFAULT 0 COMMENT '性别，0.男 1.女',
+  `school` varchar(64) DEFAULT NULL COMMENT '所在学校',
+  `grade` int DEFAULT NULL COMMENT '年级',
+  `living_address` varchar(128) DEFAULT NULL COMMENT '现居住地址',
+  `img_path` varchar(256) DEFAULT NULL COMMENT '头像地址',
+  `describe_info` text DEFAULT NULL COMMENT '说明信息',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='员工信息存储'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='学生信息存储';
+
+CREATE TABLE `user_parent` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `gender` bit(1) DEFAULT 0 COMMENT '关系，0.父亲 1.母亲',
+  `telephone` varchar(11) NOT NULL COMMENT '手机号，同时为登陆账号',
+  `pass_word` varchar(32) NOT NULL COMMENT '登陆密码',
+  `describe_info` text DEFAULT NULL COMMENT '说明信息',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY (`telephone`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='家长信息存储';
+
+CREATE TABLE `info_course` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `course_name` varchar(32) NOT NULL COMMENT '课程名',
+  `class_hours` int NOT NULL COMMENT '单节课时时间(分钟)',
+  `class_count` int NOT NULL COMMENT '学期课程节数',
+  `course_price` int NOT NULL COMMENT '学期课程价格',
+  `describe_info` text DEFAULT NULL COMMENT '说明信息',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='课程信息存储';
+
+CREATE TABLE `union_course` (
+  `teacher_id` int(11) NOT NULL COMMENT '教师id',
+  `course_id` int(11) NOT NULL COMMENT '课程id'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='教师课程关联信息';
+
+CREATE TABLE `plan_class` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `course_id` int(11) NOT NULL COMMENT '课程id',
+  `teacher_id` int(11) NOT NULL COMMENT '上课教师id',
+  `student_id` varchar(256) NOT NULL COMMENT '上课学生id集合',
+  `class_progress` int NOT NULL COMMENT '已完成课时进度(节)',
+  `historical_time` text DEFAULT NULL COMMENT '历史上课时间',
+  `next_class_time` datetime DEFAULT NULL COMMENT '下次上课时间',
+  `describe_info` text DEFAULT NULL COMMENT '说明信息',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='排课信息存储';
