@@ -6,6 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="website-tools" />
+        <module name="websitetools" />
         <module name="webstore-api" />
         <module name="webstore-crawler" />
         <module name="webstore-web" />
